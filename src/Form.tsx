@@ -1,18 +1,26 @@
 import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
+
+interface FormData {
+  name: string;
+  mailAddress: string;
+  gender: string;
+  agreement: boolean;
+  contact: string;
+}
 
 function App() {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid }
-  } = useForm({ mode: 'onChange' });
+  } = useForm<FormData>({ mode: 'onChange' });
 
   // 送信内容を保存
-  const [submittedData, setSubmittedData] = useState(null);
+  const [submittedData, setSubmittedData] = useState<FormData | null>(null);
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: FormData) => {
     setSubmittedData(data);
     console.log(data);
   };
@@ -20,7 +28,6 @@ function App() {
   return (
     <div>
       <form className="App" onSubmit={handleSubmit(onSubmit)}>
-        {/* レイアウト都合でここにエラー文を記載 */}
         {errors.name && <span>{errors.name.message}</span>}
         <div className="form-group">
           <label htmlFor="name">氏名:</label>
