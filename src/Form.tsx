@@ -10,7 +10,7 @@ interface FormData {
   contact: string;
 }
 
-function App() {
+const Form = () => {
   const {
     register,
     handleSubmit,
@@ -22,7 +22,6 @@ function App() {
 
   const onSubmit = (data: FormData) => {
     setSubmittedData(data);
-    console.log(data);
   };
 
   return (
@@ -77,4 +76,4 @@ function App() {
     </div>
   );
 }
-export default App;
+export default Form;
